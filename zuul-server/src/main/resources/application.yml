@@ -1,0 +1,33 @@
+spring:
+  profiles:
+    active: dev
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    registry-fetch-interval-seconds: 5
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.non-secure-port}/eureka/eureka/
+zuul:
+  prefix: /api
+app:
+  id: zuul-server
+
+---
+spring:
+  profiles: dev
+eureka:
+  instance:
+    hostname: 172.16.1.168
+    non-secure-port: 8761
+---
+spring:
+  profiles: uat
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://10.252.187.201:8761/eureka/eureka/,http://10.252.187.222:8761/eureka/eureka/
+apollo:
+  meta: http://10.252.187.201:8060,http://10.252.187.202:8060

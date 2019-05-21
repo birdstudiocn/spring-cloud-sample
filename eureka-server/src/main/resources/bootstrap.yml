@@ -1,0 +1,30 @@
+server:
+  port: 8761
+  servlet:
+    context-path: /eureka
+spring:
+  application:
+    name: eureka-server
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: 127.0.0.1
+  client:
+    registerWithEureka: false
+    fetch-registry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/eureka/
+
+---
+spring:
+  profiles: dev
+eureka:
+  instance:
+    hostname: 172.16.1.168
+
+---
+spring:
+  profiles: uat
+eureka:
+  instance:
+    hostname: 10.252.187.222
